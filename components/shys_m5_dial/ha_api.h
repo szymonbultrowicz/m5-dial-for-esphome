@@ -1,6 +1,7 @@
 #pragma once
 #include "esphome.h"
 #include "esphome/components/api/api_pb2.h"
+#include "esphome/components/api/api_server.h"
 
 namespace esphome
 {
