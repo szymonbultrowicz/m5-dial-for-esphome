@@ -129,6 +129,10 @@ SCREENSAVER = ["off", "clock"]
 
 # ------------------------------------------------------
 
+DEPENDENCIES = ["api"]
+
+# ------------------------------------------------------
+
 shys_m5_dial_ns = cg.esphome_ns.namespace('shys_m5_dial')
 ShysM5Dial = shys_m5_dial_ns.class_('ShysM5Dial', cg.Component)
 
