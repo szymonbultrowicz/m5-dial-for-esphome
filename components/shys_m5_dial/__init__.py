@@ -301,7 +301,7 @@ async def to_code(config):
 
     cg.add_library("Wire", None)
     cg.add_library("EEPROM", None)
-    cg.add_library("ArduinoJson", None)
+    cg.add_library("bblanchon/ArduinoJson", None)
     cg.add_library("m5stack/M5Unified", "0.1.14")
     cg.add_library("m5stack/M5Dial", "1.0.2")
 
