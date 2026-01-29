@@ -129,6 +129,10 @@ SCREENSAVER = ["off", "clock"]
 
 # ------------------------------------------------------
 
+DEPENDENCIES = ["api"]
+
+# ------------------------------------------------------
+
 shys_m5_dial_ns = cg.esphome_ns.namespace('shys_m5_dial')
 ShysM5Dial = shys_m5_dial_ns.class_('ShysM5Dial', cg.Component)
 
@@ -298,6 +302,12 @@ CONFIG_SCHEMA = cv.Schema({
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
+
+    cg.add_library("Wire", None)
+    cg.add_library("EEPROM", None)
+    cg.add_library("bblanchon/ArduinoJson", None)
+    cg.add_library("m5stack/M5Unified", "0.1.14")
+    cg.add_library("m5stack/M5Dial", "1.0.2")
 
     if CONF_SCREEN_OFF_TIME in config:
         screenOffTime = config[CONF_SCREEN_OFF_TIME]

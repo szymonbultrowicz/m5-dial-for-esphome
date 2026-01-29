@@ -1,6 +1,7 @@
 #pragma once
 #include "esphome.h"
 #include "esphome/components/api/api_pb2.h"
+#include "esphome/components/api/api_server.h"
 
 namespace esphome
 {
@@ -16,7 +17,7 @@ namespace esphome
             public:
 
                 void updateEntity(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("homeassistant.update_entity"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -29,7 +30,7 @@ namespace esphome
 
 
                 void turnLightOn(const std::string& entity, int brightness = -1, int colorValue = -1){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("light.turn_on"));
 
                     int data_count = 1 + (brightness >= 0 ? 1 : 0);
@@ -62,7 +63,7 @@ namespace esphome
                 }
 
                 void turnLightOnWhite(const std::string& entity, int kelvin = -1){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("light.turn_on"));
                     
                     int data_count = (kelvin >= 0) ? 2 : 1;
@@ -85,7 +86,7 @@ namespace esphome
 
 
                 void turnLightOff(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("light.turn_off"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -96,7 +97,7 @@ namespace esphome
                 }
 
                 void toggleLight(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("light.toggle"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -112,7 +113,7 @@ namespace esphome
 
 
                 void turnClimateOn(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("climate.turn_on"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -123,7 +124,7 @@ namespace esphome
                 }
 
                 void turnClimateOff(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("climate.turn_off"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -134,7 +135,7 @@ namespace esphome
                 }
 
                 void setClimateTemperature(const std::string& entity, int value){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("climate.set_temperature"));
                     resp.data.init(2);
                     
@@ -151,7 +152,7 @@ namespace esphome
                 }
 
                 void setClimateFanMode(const std::string& entity, const std::string& mode){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("climate.set_fan_mode"));
                     resp.data.init(2);
                     
@@ -170,7 +171,7 @@ namespace esphome
 
 
                 void setCoverPosition(const std::string& entity, int value){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("cover.set_cover_position"));
                     resp.data.init(2);
                     
@@ -192,7 +193,7 @@ namespace esphome
 
 
                 void turnSwitchOn(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("switch.turn_on"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -203,7 +204,7 @@ namespace esphome
                 }
 
                 void turnSwitchOff(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("switch.turn_off"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -214,7 +215,7 @@ namespace esphome
                 }
 
                 void toggleSwitch(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("switch.toggle"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -230,7 +231,7 @@ namespace esphome
 
 
                 void turnFanOn(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("fan.turn_on"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -241,7 +242,7 @@ namespace esphome
                 }
 
                 void turnFanOff(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("fan.turn_off"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -252,7 +253,7 @@ namespace esphome
                 }
 
                 void toggleFan(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("fan.toggle"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -263,7 +264,7 @@ namespace esphome
                 }
 
                 void setFanDirection(const std::string& entity, const char* direction){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("fan.set_direction"));
                     resp.data.init(2);
                     
@@ -280,7 +281,7 @@ namespace esphome
                 }
 
                 void setFanSpeed(const std::string& entity, int value){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("fan.set_percentage"));
                     resp.data.init(2);
                     
@@ -303,7 +304,7 @@ namespace esphome
 
 
                 void setMediaPlayerVolume(const std::string& entity, int value){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("media_player.volume_set"));
                     resp.data.init(2);
                     
@@ -320,7 +321,7 @@ namespace esphome
                 }
 
                 void stopMediaPlayer(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("media_player.media_stop"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -331,7 +332,7 @@ namespace esphome
                 }
 
                 void setNextTrackOnMediaPlayer(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("media_player.media_next_track"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -342,7 +343,7 @@ namespace esphome
                 }
 
                 void setPreviousTrackOnMediaPlayer(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("media_player.media_previous_track"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -353,7 +354,7 @@ namespace esphome
                 }
 
                 void playPauseMediaPlayer(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("media_player.media_play_pause"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -364,7 +365,7 @@ namespace esphome
                 }
 
                 void playMediaOnMediaPlayer(const std::string& entity, const std::string& media_content_id, const std::string& media_content_type){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("media_player.play_media"));
                     resp.data.init(3);
                     
@@ -385,7 +386,7 @@ namespace esphome
                 }
 
                 void refreshMediaPlayer(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("homeassistant.update_entity"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -402,7 +403,7 @@ namespace esphome
 
 
                 void openLock(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("lock.open"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -413,7 +414,7 @@ namespace esphome
                 }
 
                 void lockLock(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("lock.lock"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -424,7 +425,7 @@ namespace esphome
                 }
 
                 void unlockLock(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("lock.unlock"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -442,7 +443,7 @@ namespace esphome
                     std::string service = this->startsWith("input_number.", entity.c_str()) ? 
                                          "input_number.set_value" : "number.set_value";
                     
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef(service));
                     resp.data.init(2);
                     
@@ -466,7 +467,7 @@ namespace esphome
 
                 // Timer start without duration (uses timer's default duration)
                 void timerStart(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("timer.start"));
                     resp.data.init(1);
                     
@@ -480,7 +481,7 @@ namespace esphome
 
                 // Timer start with specific duration
                 void timerStart(const std::string& entity, int duration){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("timer.start"));
                     resp.data.init(2);
                     
@@ -497,7 +498,7 @@ namespace esphome
                 }
 
                 void timerPause(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("timer.pause"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -508,7 +509,7 @@ namespace esphome
                 }
 
                 void timerCancle(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("timer.cancle"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -519,7 +520,7 @@ namespace esphome
                 }
 
                 void timerFinish(const std::string& entity){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("timer.finish"));
                     resp.data.init(1);
                     auto &kv = resp.data.emplace_back();
@@ -530,7 +531,7 @@ namespace esphome
                 }
 
                 void timerChange(const std::string& entity, int duration){
-                    esphome::api::HomeassistantActionRequest resp;
+                    esphome::api::HomeassistantServiceResponse resp;
                     resp.set_service(esphome::StringRef("timer.change"));
                     resp.data.init(2);
                     
