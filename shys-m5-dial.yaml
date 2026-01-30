@@ -17,7 +17,7 @@ esphome:
       - m5stack/M5Dial@1.0.2
 
 external_components:
-  - source: github:szymonbultrowicz/m5-dial-for-esphome@szymonbultrowicz-patch-1
+  - source: github://szymonbultrowicz/m5-dial-for-esphome@szymonbultrowicz-patch-1
     components: [shys_m5_dial]
 
 dashboard_import:
